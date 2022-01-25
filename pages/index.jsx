@@ -1,25 +1,24 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
-import { GlobalStyle, Titulo } from "../style";
+import { Titulo } from "../style";
 import appConfig from "../config.json";
 
 export default function PaginaInicial() {
-  // const username = '';
-
   const [userName, setUserName] = useState("OdMatheuS");
+  const roteamento = useRouter();
 
   function handleChange(e) {
     setUserName(e.target.value);
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setUserName("");
+  function handleSubmit(infosDoEventoDoBrowser) {
+    infosDoEventoDoBrowser.preventDefault();
+    roteamento.push("/chat");
   }
 
   return (
     <>
-      <GlobalStyle />
       <Box
         styleSheet={{
           display: "flex",
@@ -54,6 +53,7 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={handleSubmit}
             styleSheet={{
               display: "flex",
               flexDirection: "column",
@@ -90,7 +90,6 @@ export default function PaginaInicial() {
               }}
             />
             <Button
-              onClick={handleSubmit}
               type="submit"
               label="Entrar"
               fullWidth
