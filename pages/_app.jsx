@@ -32,7 +32,7 @@ function GlobalStyle()  {
 };
 
 export default function GlobalApp({ Component, pageProps }){
-  console.log("Roda de maneira global em todas as paginas da aplicacao");
+  // console.log("Roda de maneira global em todas as paginas da aplicacao");
   return (
     <>
       <GlobalStyle />
