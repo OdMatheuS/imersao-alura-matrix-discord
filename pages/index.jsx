@@ -1,12 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import { Titulo } from "../style";
 import appConfig from "../config.json";
 
 export default function PaginaInicial() {
+  useEffect(() => {
+    getInfosUser()
+  })
+
   const [userName, setUserName] = useState("OdMatheuS");
   const roteamento = useRouter();
+
+  let objUser;
+
+  const getInfosUser = () => {
+      fetch(`https://api.github.com/users/${userName}`)
+      .then((res) => res.json())
+      .then((allInfos) => {
+         [allInfos].forEach(element => {
+          objUser = element 
+        }); 
+      })
+    }
+  
 
   function handleChange(e) {
     const valueInput = e.target.value;
